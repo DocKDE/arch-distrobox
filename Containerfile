@@ -3,7 +3,6 @@ FROM quay.io/toolbx-images/archlinux-toolbox AS arch-distrobox
 # Pacman Initialization
 # Create build user
 RUN sed -i 's/#Color/Color/g' /etc/pacman.conf && \
-    printf "[multilib]\nInclude = /etc/pacman.d/mirrorlist\n" | tee -a /etc/pacman.conf && \
     sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j$(nproc)"/g' /etc/makepkg.conf && \
     pacman -Syu --noconfirm && \
     pacman -S \
@@ -69,13 +68,7 @@ RUN pacman -S \
         vte-common \
         wget \
         words \
-        xorg-xauth \
         zip \
-        # mesa \
-        # opengl-driver \
-        # vulkan-intel \
-        # vte-common \
-        # vulkan-radeon \
         --noconfirm
 
 # Add paru and install AUR packages
@@ -87,8 +80,6 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
     cd .. && \
     rm -drf paru-bin && \
     paru -S \
-        # aur/xcursor-breeze \
-        # aur/adw-gtk3 \
         starship \
         helix \
         neovim \
@@ -110,7 +101,6 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         git-delta \
         p7zip \
         atuin \
-        nix \
         devbox-bin \
         rtx-bin \
         aws-cli-v2 \
@@ -127,6 +117,8 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
 USER root
 WORKDIR /
 
+RUN curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+
 # Cleanup
 RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen && \
     userdel -r build && \
@@ -136,36 +128,3 @@ RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen && \
     rm -rf \
         /tmp/* \
         /var/cache/pacman/pkg/*
-
-# FROM arch-distrobox AS arch-distrobox-amdgpupro
-
-# Install amdgpu-pro, remove other drivers
-# RUN pacman -R \
-#         libglvnd \
-#         vulkan-intel \
-#         vulkan-radeon \
-#         mesa \
-#         --noconfirm && \
-# RUN useradd -m --shell=/bin/bash build && usermod -L build && \
-#     echo "build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-#     echo "root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-
-# USER build
-# WORKDIR /home/build
-# RUN paru -S \
-#         amdgpu-pro-oglp \
-#         lib32-amdgpu-pro-oglp \
-#         vulkan-amdgpu-pro \
-#         lib32-vulkan-amdgpu-pro \
-#         amf-amdgpu-pro \
-# USER root
-# WORKDIR /
-
-# # Cleanup
-# RUN userdel -r build && \
-#     rm -drf /home/build && \
-#     sed -i '/build ALL=(ALL) NOPASSWD: ALL/d' /etc/sudoers && \
-#     sed -i '/root ALL=(ALL) NOPASSWD: ALL/d' /etc/sudoers && \
-#     rm -rf \
-#         /tmp/* \
-#         /var/cache/pacman/pkg/*
