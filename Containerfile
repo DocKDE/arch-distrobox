@@ -71,11 +71,11 @@ RUN pacman -S \
         words \
         xorg-xauth \
         zip \
-        mesa \
-        opengl-driver \
-        vulkan-intel \
-        vte-common \
-        vulkan-radeon \
+        # mesa \
+        # opengl-driver \
+        # vulkan-intel \
+        # vte-common \
+        # vulkan-radeon \
         --noconfirm
 
 # Add paru and install AUR packages
@@ -87,9 +87,43 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
     cd .. && \
     rm -drf paru-bin && \
     paru -S \
-        aur/xcursor-breeze \
-        aur/adw-gtk3 \
+        # aur/xcursor-breeze \
+        # aur/adw-gtk3 \
+        starship \
+        helix \
+        neovim \
+        gitui \
+        bat \
+        zsh \
+        zsh-autosuggestions \
+        zsh-syntax-highlighting \
+        zoxide \
+        fd \
+        ripgrep \
+        exa \
+        libsecret \
+        direnv \
+        fzf \
+        yt-dlp \
+        ytfzf \
+        mpv \
+        git-delta \
+        p7zip \
+        atuin \
+        nix \
+        devbox-bin \
+        rtx-bin \
+        aws-cli-v2 \
+        dust \
+        dysk \
+        ouch \
+        zellij \
+        bottom \
+        git-remote-codecommit \
+        yazi \
+        btop \
         --noconfirm
+
 USER root
 WORKDIR /
 
@@ -103,36 +137,35 @@ RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen && \
         /tmp/* \
         /var/cache/pacman/pkg/*
 
-FROM arch-distrobox AS arch-distrobox-amdgpupro
+# FROM arch-distrobox AS arch-distrobox-amdgpupro
 
 # Install amdgpu-pro, remove other drivers
-RUN pacman -R \
-        libglvnd \
-        vulkan-intel \
-        vulkan-radeon \
-        mesa \
-        --noconfirm && \
-    useradd -m --shell=/bin/bash build && usermod -L build && \
-    echo "build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    echo "root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+# RUN pacman -R \
+#         libglvnd \
+#         vulkan-intel \
+#         vulkan-radeon \
+#         mesa \
+#         --noconfirm && \
+# RUN useradd -m --shell=/bin/bash build && usermod -L build && \
+#     echo "build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+#     echo "root ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-USER build
-WORKDIR /home/build
-RUN paru -S \
-        amdgpu-pro-oglp \
-        lib32-amdgpu-pro-oglp \
-        vulkan-amdgpu-pro \
-        lib32-vulkan-amdgpu-pro \
-        amf-amdgpu-pro \
-        --noconfirm
-USER root
-WORKDIR /
+# USER build
+# WORKDIR /home/build
+# RUN paru -S \
+#         amdgpu-pro-oglp \
+#         lib32-amdgpu-pro-oglp \
+#         vulkan-amdgpu-pro \
+#         lib32-vulkan-amdgpu-pro \
+#         amf-amdgpu-pro \
+# USER root
+# WORKDIR /
 
-# Cleanup
-RUN userdel -r build && \
-    rm -drf /home/build && \
-    sed -i '/build ALL=(ALL) NOPASSWD: ALL/d' /etc/sudoers && \
-    sed -i '/root ALL=(ALL) NOPASSWD: ALL/d' /etc/sudoers && \
-    rm -rf \
-        /tmp/* \
-        /var/cache/pacman/pkg/*
+# # Cleanup
+# RUN userdel -r build && \
+#     rm -drf /home/build && \
+#     sed -i '/build ALL=(ALL) NOPASSWD: ALL/d' /etc/sudoers && \
+#     sed -i '/root ALL=(ALL) NOPASSWD: ALL/d' /etc/sudoers && \
+#     rm -rf \
+#         /tmp/* \
+#         /var/cache/pacman/pkg/*
