@@ -116,7 +116,6 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         git-remote-codecommit \
         yazi \
         btop \
-        just \
         --noconfirm
 
 USER root
