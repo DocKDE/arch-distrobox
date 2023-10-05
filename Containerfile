@@ -31,7 +31,6 @@ RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/dis
     ln -s /usr/bin/distrobox-host-exec /usr/bin/podman && \
     ln -s /usr/bin/distrobox-host-exec /usr/bin/rpm-ostree && \
     ln -s /usr/bin/distrobox-host-exec /usr/bin/distrobox && \
-    ln -s /usr/bin/distrobox-host-exec /usr/bin/just && \
     wget https://github.com/1player/host-spawn/releases/download/$(cat /tmp/distrobox/distrobox-host-exec | grep host_spawn_version= | cut -d "\"" -f 2)/host-spawn-$(uname -m) -O /usr/bin/host-spawn && \
     chmod +x /usr/bin/host-spawn && \
     rm -drf /tmp/distrobox
