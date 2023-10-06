@@ -73,7 +73,8 @@ RUN pacman -S \
         wget \
         words \
         zip \
-        --noconfirm
+        --noconfirm \
+        --needed
 
 # Add paru and install AUR packages
 USER build
@@ -91,6 +92,7 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         bottom \
         direnv \
         docker-compose \
+        docker-slim \
         dust \
         dysk \
         exa \
@@ -117,7 +119,8 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         zsh \
         zsh-autosuggestions \
         zsh-syntax-highlighting \
-        --noconfirm
+        --noconfirm \
+        --needed
 
 USER root
 WORKDIR /
