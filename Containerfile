@@ -84,38 +84,39 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
     cd .. && \
     rm -drf paru-bin && \
     paru -S \
-        starship \
-        helix \
-        neovim \
-        gitui \
+        atuin \
+        aws-cli-v2 \
         bat \
+        btop \
+        bottom \
+        direnv \
+        docker-compose \
+        dust \
+        dysk \
+        exa \
+        fd \
+        fzf \
+        git-delta \
+        git-remote-codecommit \
+        gitui \
+        helix \
+        just \
+        libsecret \
+        mpv \
+        neovim \
+        ouch \
+        p7zip \
+        ripgrep \
+        rtx-bin \
+        starship \
+        yazi \
+        yt-dlp \
+        ytfzf \
+        zellij \
+        zoxide \
         zsh \
         zsh-autosuggestions \
         zsh-syntax-highlighting \
-        zoxide \
-        fd \
-        ripgrep \
-        exa \
-        libsecret \
-        direnv \
-        fzf \
-        yt-dlp \
-        ytfzf \
-        mpv \
-        git-delta \
-        p7zip \
-        atuin \
-        rtx-bin \
-        aws-cli-v2 \
-        dust \
-        dysk \
-        ouch \
-        zellij \
-        bottom \
-        git-remote-codecommit \
-        yazi \
-        btop \
-        just \
         --noconfirm
 
 USER root
