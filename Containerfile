@@ -103,6 +103,7 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         gitui \
         helix \
         just \
+        lazygit \
         libsecret \
         mpv \
         neovim \
