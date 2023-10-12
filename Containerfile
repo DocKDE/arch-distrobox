@@ -90,6 +90,7 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         bat \
         btop \
         bottom \
+        devbox-bin \
         direnv \
         docker-compose \
         docker-slim \
