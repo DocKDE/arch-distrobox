@@ -103,6 +103,7 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         git-remote-codecommit \
         gitui \
         helix \
+        jless \
         just \
         lazygit \
         libsecret \
@@ -113,6 +114,7 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         ripgrep \
         rtx-bin \
         starship \
+        wl-clipboard \
         yazi \
         yt-dlp \
         ytfzf \
