@@ -89,7 +89,6 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         aws-cli-v2 \
         bat \
         btop \
-        bottom \
         devbox-bin \
         direnv \
         docker-compose \
@@ -110,7 +109,6 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         mpv \
         neovim \
         ouch \
-        p7zip \
         ripgrep \
         rtx-bin \
         starship \
