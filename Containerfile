@@ -101,6 +101,7 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         git-delta \
         git-remote-codecommit \
         gitui \
+        hadolint-bin \
         helix \
         jless \
         just \
@@ -111,6 +112,7 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         ouch \
         ripgrep \
         rtx-bin \
+        shellcheck-bin \
         starship \
         wl-clipboard \
         yazi \
