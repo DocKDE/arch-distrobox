@@ -115,6 +115,7 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         rtx-bin \
         shellcheck-bin \
         starship \
+        watchexec \
         wl-clipboard \
         yazi \
         yt-dlp \
