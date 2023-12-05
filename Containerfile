@@ -108,7 +108,6 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         just \
         lazygit \
         libsecret \
-        mpv \
         neovim \
         ouch \
         ripgrep \
