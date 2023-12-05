@@ -132,7 +132,9 @@ USER root
 WORKDIR /
 
 # Helix symlink
-RUN ln -s /usr/lib/helix/hx /usr/bin/hx
+RUN ln -s /usr/lib/helix/hx /usr/bin/hx && \
+    echo "LANG=en_US.UTF-8" >> /etc/locale.conf && \
+    locale-gen
 
 # Cleanup
 RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen && \
