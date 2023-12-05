@@ -132,12 +132,12 @@ USER root
 WORKDIR /
 
 # Helix symlink
-RUN ln -s /usr/lib/helix/hx /usr/bin/hx && \
-    echo "LANG=en_US.UTF-8" >> /etc/locale.conf && \
-    locale-gen
+RUN ln -s /usr/lib/helix/hx /usr/bin/hx 
 
 # Cleanup
 RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen && \
+    echo "LANG=en_US.UTF-8" >> /etc/locale.conf && \
+    locale-gen && \
     userdel -r build && \
     rm -drf /home/build && \
     sed -i '/build ALL=(ALL) NOPASSWD: ALL/d' /etc/sudoers && \
@@ -145,3 +145,4 @@ RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen && \
     rm -rf \
         /tmp/* \
         /var/cache/pacman/pkg/*
+
