@@ -88,7 +88,7 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         atuin \
         aws-cli-v2 \
         bat \
-        btop \
+        bottom \
         devbox-bin \
         direnv \
         dive \
