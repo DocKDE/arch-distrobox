@@ -109,10 +109,10 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
         just \
         lazygit \
         libsecret \
+        mise-bin \
         neovim \
         ouch \
         ripgrep \
-        rtx-bin \
         shellcheck-bin \
         starship \
         watchexec \
