@@ -37,47 +37,11 @@ RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/dis
     rm -drf /tmp/distrobox
 
 # Install packages Distrobox adds automatically, this speeds up first launch
-RUN pacman -S \
-        bash-completion \
-        bc \
-        curl \
-        diffutils \
-        findutils \
-        glibc \
-        gnupg \
-        inetutils \
-        keyutils \
-        less \
-        lsof \
-        man-db \
-        man-pages \
-        mlocate \
-        mtr \
-        ncurses \
-        nss-mdns \
-        openssh \
-        pigz \
-        pinentry \
-        procps-ng \
-        rsync \
-        shadow \
-        sudo \
-        tcpdump \
-        time \
-        traceroute \
-        tree \
-        tzdata \
-        unzip \
-        util-linux \
-        util-linux-libs \
-        vte-common \
-        wget \
-        words \
-        zip \
-        --noconfirm \
-        --needed
+COPY base-packages.txt / 
+COPY extra-packages.txt /
+RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed
 
-# Add paru and install AUR packages
+# Add paru and install custom and AUR packages
 USER build
 WORKDIR /home/build
 RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
@@ -85,48 +49,7 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
     makepkg -si --noconfirm && \
     cd .. && \
     rm -drf paru-bin && \
-    paru -S \
-        atuin \
-        aws-cli-v2 \
-        bat \
-        bottom \
-        devbox-bin \
-        direnv \
-        dive \
-        docker-compose \
-        docker-slim \
-        dust \
-        dysk \
-        exa \
-        fd \
-        fzf \
-        git-delta \
-        git-remote-codecommit \
-        gitui \
-        hadolint-bin \
-        helix \
-        jless \
-        just \
-        lazygit \
-        libsecret \
-        mise-bin \
-        neovim \
-        ouch \
-        ripgrep \
-        shellcheck-bin \
-        starship \
-        watchexec \
-        wl-clipboard \
-        yazi \
-        yt-dlp \
-        ytfzf \
-        zellij \
-        zoxide \
-        zsh \
-        zsh-autosuggestions \
-        zsh-syntax-highlighting \
-        --noconfirm \
-        --needed
+    grep -v '^#' /extra-packages.txt | xargs paru -Syu --noconfirm --needed
 
 USER root
 WORKDIR /
@@ -144,5 +67,7 @@ RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen && \
     sed -i '/root ALL=(ALL) NOPASSWD: ALL/d' /etc/sudoers && \
     rm -rf \
         /tmp/* \
-        /var/cache/pacman/pkg/*
+        /var/cache/pacman/pkg/* \
+        /base-packages.txt \
+        /extra-packages.txt
 
