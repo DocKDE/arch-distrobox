@@ -2,6 +2,7 @@ atuin
 aws-cli-v2
 bat
 bottom
+clipboard
 devbox-bin
 direnv
 dive
@@ -28,7 +29,6 @@ ripgrep
 shellcheck-bin
 starship
 watchexec
-wl-clipboard
 yazi
 yt-dlp
 ytfzf
