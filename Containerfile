@@ -39,7 +39,7 @@ RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/dis
 # Install packages Distrobox adds automatically, this speeds up first launch
 COPY base-packages.txt / 
 COPY extra-packages.txt /
-COPY install-slim.sh
+COPY install-slim.sh /install-slim
 RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed
 
 # Add paru and install custom and AUR packages
@@ -50,8 +50,8 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
     makepkg -si --noconfirm && \
     cd .. && \
     rm -drf paru-bin && \
-    grep -v '^#' /extra-packages.txt | xargs paru -Syu --noconfirm --needed
-    /bin/sh /install-slim.sh
+    grep -v '^#' /extra-packages.txt | xargs paru -Syu --noconfirm --needed && \
+    /install-slim
 
 USER root
 WORKDIR /
