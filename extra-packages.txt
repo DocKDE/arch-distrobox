@@ -1,5 +1,6 @@
 atuin
 aws-cli-v2
+bash-language-server
 bat
 bottom
 clipboard
@@ -27,9 +28,12 @@ mise-bin
 neovim
 ouch
 ripgrep
-shellcheck-bin
+shellcheck
 starship
+taplo-cli
+vscode-json-language-server
 watchexec
+yaml-language-server
 yazi
 yt-dlp
 ytfzf
