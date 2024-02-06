@@ -30,7 +30,7 @@ ripgrep
 shellcheck
 starship
 taplo-cli
-vscode-json-language-server
+vscode-json-languageserver
 watchexec
 yaml-language-server
 yazi
