@@ -8,7 +8,6 @@ devbox-bin
 direnv
 dive
 docker-compose
-docker-slim
 dust
 dysk
 exa
