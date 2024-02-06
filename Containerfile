@@ -39,14 +39,16 @@ RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/dis
 # Install packages Distrobox adds automatically, this speeds up first launch
 COPY base-packages.txt / 
 COPY extra-packages.txt /
-COPY install-slim.sh /install-slim
-RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed && \
-    /install-slim
+COPY slim/* /tmp/
+RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed 
 
 # Add paru and install custom and AUR packages
 USER build
 WORKDIR /home/build
-RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
+RUN export TAG=$(curl -sL https://api.github.com/repos/slimtoolkit/slim/releases/latest | jq -r .tag_name) && \
+    cd /tmp && envsubst '${TAG}' < PKGBUILD.temp > PKGBUILD && \
+    makepkg -si --noconfirm && \
+    cd /home/build && git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
     cd paru-bin && \
     makepkg -si --noconfirm && \
     cd .. && \
@@ -71,6 +73,5 @@ RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen && \
         /tmp/* \
         /var/cache/pacman/pkg/* \
         /base-packages.txt \
-        /extra-packages.txt \
-        /install-slim
+        /extra-packages.txt 
 
