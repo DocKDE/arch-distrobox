@@ -22,7 +22,9 @@ RUN git clone https://github.com/KyleGospo/xdg-utils-distrobox-arch.git --single
     cd xdg-utils-distrobox-arch/trunk && \
     makepkg -si --noconfirm && \
     cd ../.. && \
-    rm -drf xdg-utils-distrobox-arch
+    rm -drf xdg-utils-distrobox-arch && \
+    # For later
+    mkdir -p slim
 USER root
 WORKDIR /
 RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/distrobox && \
@@ -39,20 +41,21 @@ RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/dis
 # Install packages Distrobox adds automatically, this speeds up first launch
 COPY base-packages.txt / 
 COPY extra-packages.txt /
-COPY slim/PKGBUILD.temp /tmp/
+COPY slim/PKGBUILD.temp /home/build/slim/
 RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed 
 
 # Add paru and install custom and AUR packages
 USER build
 WORKDIR /home/build
 RUN export TAG=$(curl -sL https://api.github.com/repos/slimtoolkit/slim/releases/latest | jq -r .tag_name) && \
-    cd /tmp && envsubst '${TAG}' < PKGBUILD.temp > PKGBUILD && \
+    cd slim && envsubst '${TAG}' < PKGBUILD.temp > PKGBUILD && \
     makepkg -si --noconfirm && \
-    cd /home/build && git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
+    rm -drf /home/build/slim && \
+    cd /home/build && \
+    git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
     cd paru-bin && \
     makepkg -si --noconfirm && \
-    cd .. && \
-    rm -drf paru-bin && \
+    rm -drf /home/build/paru-bin && \
     grep -v '^#' /extra-packages.txt | xargs paru -Syu --noconfirm --needed
 
 USER root
