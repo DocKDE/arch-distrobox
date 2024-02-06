@@ -10,7 +10,9 @@ source=("${pkgver}.tar.gz::https://downloads.dockerslim.com/releases/${pkgver}/d
 sha256sums=("SKIP")
 
 package() {
-  mkdir -p $pkgdir/usr/bin
-  cp $srcdir/dist_linux/* $pkgdir/usr/bin/
+  cd "$srcdir/dist_linux"
+
+  install -Dm755 slim "${pkgdir}/usr/bin/slim"
+  install -Dm755 slim-sensor "${pkgdir}/usr/bin/slim-sensor"
 }
 
