@@ -39,7 +39,7 @@ RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/dis
 # Install packages Distrobox adds automatically, this speeds up first launch
 COPY base-packages.txt / 
 COPY extra-packages.txt /
-COPY slim/* /tmp/
+COPY slim/PKGBUILD.temp /tmp/
 RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed 
 
 # Add paru and install custom and AUR packages
