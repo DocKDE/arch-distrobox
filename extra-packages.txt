@@ -7,7 +7,6 @@ clipboard
 devbox-bin
 direnv
 dive
-docker-compose
 dust
 dysk
 exa
@@ -33,7 +32,6 @@ taplo-cli
 vscode-json-languageserver
 watchexec
 yaml-language-server
-yazi
 yt-dlp
 ytfzf
 zellij

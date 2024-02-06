@@ -40,7 +40,8 @@ RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/dis
 COPY base-packages.txt / 
 COPY extra-packages.txt /
 COPY install-slim.sh /install-slim
-RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed
+RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed && \
+    /install-slim
 
 # Add paru and install custom and AUR packages
 USER build
@@ -50,8 +51,7 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
     makepkg -si --noconfirm && \
     cd .. && \
     rm -drf paru-bin && \
-    grep -v '^#' /extra-packages.txt | xargs paru -Syu --noconfirm --needed && \
-    /install-slim
+    grep -v '^#' /extra-packages.txt | xargs paru -Syu --noconfirm --needed
 
 USER root
 WORKDIR /
@@ -72,5 +72,5 @@ RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen && \
         /var/cache/pacman/pkg/* \
         /base-packages.txt \
         /extra-packages.txt \
-        /install-slim.sh
+        /install-slim
 
