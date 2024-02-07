@@ -28,14 +28,13 @@ A few other niceties are also added, namely:
 Furthermore some things more focussed on my dev work:
 
 * aws-cli V2
-* docker, docker-compose and docker-slim
+* docker and docker-slim
 * git-remote-codecommit (for interacting with AWS Codecommit)
 * git-delta (visually nice diff viewer)
 * libsecret (for storing things like git credentials)
 * rtx (runtime chooser)
 * gitui (TUI git interface)
 * helix (terminal editor)
-* mpv (for playing things with ytfzf)
 * neovim (mostly for legacy purposes now)
 
 Lastly, in order to be able to use this image more seamlessly as a full-time

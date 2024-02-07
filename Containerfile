@@ -50,10 +50,12 @@ COPY slim/PKGBUILD.temp /home/build/slim/
 RUN export TAG=$(curl -sL https://api.github.com/repos/slimtoolkit/slim/releases/latest | jq -r .tag_name) && \
     cd slim && envsubst '${TAG}' < PKGBUILD.temp > PKGBUILD && \
     makepkg -si --noconfirm && \
+    ls -l && \
     rm -drf /home/build/slim && \
     cd /home/build && \
     git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
     cd paru-bin && \
+    ls -l && \
     makepkg -si --noconfirm && \
     rm -drf /home/build/paru-bin && \
     grep -v '^#' /extra-packages.txt | xargs paru -Syu --noconfirm --needed

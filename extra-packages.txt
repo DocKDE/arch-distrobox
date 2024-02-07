@@ -24,7 +24,6 @@ lazygit
 libsecret
 mise-bin
 neovim
-ouch
 ripgrep
 shellcheck
 starship
