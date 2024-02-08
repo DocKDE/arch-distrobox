@@ -64,7 +64,8 @@ USER root
 WORKDIR /
 
 # Helix symlink
-RUN ln -s /usr/lib/helix/hx /usr/bin/hx 
+RUN ln -s /usr/lib/helix/hx /usr/bin/hx && \
+    devbox completion zsh > /usr/share/zsh/site-functions/_devbox
 
 # Cleanup
 RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen && \
