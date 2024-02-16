@@ -1,3 +1,4 @@
+ansible
 atuin
 aws-cli-v2
 bash-language-server
