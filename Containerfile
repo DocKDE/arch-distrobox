@@ -22,9 +22,7 @@ RUN git clone https://github.com/KyleGospo/xdg-utils-distrobox-arch.git --single
     cd xdg-utils-distrobox-arch/trunk && \
     makepkg -si --noconfirm && \
     cd ../.. && \
-    rm -drf xdg-utils-distrobox-arch && \
-    # For later
-    mkdir -p slim
+    rm -drf xdg-utils-distrobox-arch
 USER root
 WORKDIR /
 RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/distrobox && \
@@ -46,13 +44,7 @@ RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed
 # Add paru and install custom and AUR packages
 USER build
 WORKDIR /home/build
-COPY slim/PKGBUILD.temp /home/build/slim/
-RUN export TAG=$(curl -sL https://api.github.com/repos/slimtoolkit/slim/releases/latest | jq -r .tag_name) && \
-    cd slim && envsubst '${TAG}' < PKGBUILD.temp > PKGBUILD && \
-    makepkg -si --noconfirm && \
-    rm -drf /home/build/slim && \
-    cd /home/build && \
-    git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
+RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
     cd paru-bin && \
     makepkg -si --noconfirm && \
     rm -drf /home/build/paru-bin && \
