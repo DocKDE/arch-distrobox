@@ -13,6 +13,7 @@ exa
 fd
 fzf
 git-delta
+git-filter-repo
 gitleaks
 gitui
 glow
