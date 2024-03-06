@@ -1,14 +1,12 @@
+# Arch packages
 ansible
 atuin
 aws-cli-v2
 bash-language-server
 bat
 bottom
-clipboard
-devbox-bin
 direnv
 dive
-docker-slim
 dust
 dysk
 exa
@@ -16,16 +14,13 @@ fd
 fzf
 git-delta
 gitleaks
-git-remote-codecommit
 gitui
 glow
-hadolint-bin
 helix
 jless
 just
 lazygit
 libsecret
-mise-bin
 neovim
 pre-commit
 ripgrep
@@ -42,4 +37,12 @@ zoxide
 zsh
 zsh-autosuggestions
 zsh-syntax-highlighting
+
+# AUR packages
+clipboard
+devbox-bin
+docker-slim
+git-remote-codecommit
+hadolint-bin
+mise-bin
 
