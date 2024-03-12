@@ -39,7 +39,11 @@ RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/dis
 # Install packages Distrobox adds automatically, this speeds up first launch
 COPY base-packages.txt / 
 COPY extra-packages.txt /
-RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed 
+COPY devbox.sh /
+COPY --from=docker.io/dslim/slim:latest /bin/slim /usr/bin/slim
+COPY --from=docker.io/dslim/slim:latest /bin/slim-sensor /usr/bin/slim-sensor
+RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed && \
+    /bin/sh /devbox.sh
 
 # Add paru and install custom and AUR packages
 USER build
@@ -70,5 +74,6 @@ RUN sed -i 's@#en_US.UTF-8@en_US.UTF-8@g' /etc/locale.gen && \
         /tmp/* \
         /var/cache/pacman/pkg/* \
         /base-packages.txt \
-        /extra-packages.txt 
+        /extra-packages.txt \
+        /devbox.sh 
 

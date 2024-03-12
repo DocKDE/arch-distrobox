@@ -17,6 +17,7 @@ git-filter-repo
 gitleaks
 gitui
 glow
+go-yq
 helix
 jless
 just
@@ -40,10 +41,6 @@ zsh-autosuggestions
 zsh-syntax-highlighting
 
 # AUR packages
-clipboard
-devbox-bin
-docker-slim
+clipboard-bin
 git-remote-codecommit
-hadolint-bin
-mise-bin
 
