@@ -58,9 +58,10 @@ RUN git clone https://aur.archlinux.org/paru-bin.git --single-branch && \
 USER root
 WORKDIR /
 
-# Helix symlink
+# Helix symlink and shell completion
 RUN ln -s /usr/lib/helix/hx /usr/bin/hx && \
     devbox completion zsh > /usr/share/zsh/site-functions/_devbox && \
+    grype completion zsh > /usr/share/zsh/site-functions/_grype && \
     curl -sfL https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker --output /usr/share/zsh/site-functions/_docker
 
 # Cleanup
