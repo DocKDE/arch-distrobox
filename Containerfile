@@ -42,6 +42,7 @@ COPY extra-packages.txt /
 COPY devbox.sh /
 COPY --from=docker.io/dslim/slim:latest /bin/slim /usr/bin/slim
 COPY --from=docker.io/dslim/slim:latest /bin/slim-sensor /usr/bin/slim-sensor
+COPY --from=cgr.dev/chainguard/grype:latest /usr/bin/grype /usr/bin/grype
 RUN grep -v '^#' /base-packages.txt | xargs pacman -Syu --noconfirm --needed && \
     /bin/sh /devbox.sh
 
